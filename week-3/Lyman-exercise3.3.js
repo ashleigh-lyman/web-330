@@ -8,7 +8,6 @@
 ;===========================================
 */
 
-
 //Header
 var header = require('../Lyman-header');
 console.log(header.display('Ashleigh', 'Lyman', 'Exercise 3.3 - Singleton Pattern', '03/03/2020'));
@@ -28,7 +27,6 @@ console.log("\n");
 */
 
 // start program
-
 
 var DatabaseSingleton = (function() {
     var instance;
