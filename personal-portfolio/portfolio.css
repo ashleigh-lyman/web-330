@@ -1,0 +1,92 @@
+body {
+    background-image: url(https://thewallpaper.co//wp-content/uploads/2017/10preview/great-hd-flower-images-tennessee-mountain-stock-photos-smoky-rivers-mountains-free-images-high-resolution-gap.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;
+}
+
+h1 {
+    text-align: center;
+    font-size: 350%;
+    padding-top: 2em;
+}
+
+h2 {
+    text-align: center;
+    font-size: 180%;
+}
+
+#icons {
+    text-align: center;
+}
+
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+
+.fa-instagram {
+    background: #125688;
+    color: white;
+}
+
+.fa-pinterest {
+    background: #cb2027;
+    color: white;
+}
+
+
+/* Add a black background color to the top navigation */
+
+.topnav {
+    overflow: hidden;
+    padding-top: 4em;
+    padding-left: 36em;
+}
+
+
+/* Style the links inside the navigation bar */
+
+.topnav a {
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    display: inline;
+}
+
+
+/* Change the color of links on hover */
+
+.topnav a:hover {
+    background-color: rgb(88, 141, 108);
+}
+
+
+/* Add a color to the active/current link */
+
+.topnav a.active {
+    background-color: rgb(88, 141, 108);
+    color: black;
+}
