@@ -8,7 +8,6 @@
 ;===========================================
 */
 
-
 //Header
 var header = require('../Lyman-header');
 console.log(header.display('Ashleigh', 'Lyman', 'Exercise 3.2 - Factory patterns', '03/03/2020'));
@@ -119,7 +118,6 @@ var informix = informixFactory.createDatabase({
 
 console.log(oracle);
 console.log(informix);
-
 
 
 
