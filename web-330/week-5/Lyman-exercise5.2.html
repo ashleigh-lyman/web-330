@@ -1,0 +1,68 @@
+<!--
+/*
+============================================
+; Title: Assignment 5.2
+; Author: Ashleigh Lyman
+; Date: 16 March 2020
+; Modified By:
+; Description: Proxy Patterns HTML
+;===========================================
+*/
+
+
+-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Exercise 5.2 - The Proxy Pattern</title>
+
+    <!-- jquery Reference Library -->
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/5DACB2B0-5003-6543-8B39-D8EE6E4FC44C/main.js" charset="UTF-8">
+    </script>
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a href="#" class="navbar-brand">Home</a>
+    </nav>
+
+    <br /><br />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Exercise 5.2 - The Proxy Pattern</h2>
+                <button class="btn btn-primary" id="btnPreviewProxy">Preview Proxy</button>
+
+                <br />
+                <span id="spanProxyResults"></span>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function() {
+
+            var dog = {
+                breed: "Labrador",
+                color: "Yellow",
+                display: function() {
+                    $("#spanProxyResults").html("");
+
+                    $("#spanProxyResults").append("<br />Breed: " + this.breed + "<br />" + "Color: " + this.color);
+                }
+            };
+            $("#btnPreviewProxy").click($.proxy(dog, "display"));
+        });
+    </script>
+
+</body>
+
+</html>
