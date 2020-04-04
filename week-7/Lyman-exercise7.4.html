@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Ashleigh Lyman-->
+<!--Exercise 7.4 - Other bindings-->
+<!--April 2 2020-->
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>Lyman-Exercise 7.4</title>
+
+    <!-- Stylesheet - Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous" />
+
+    <!-- JavaScript Libraries -->
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/5DACB2B0-5003-6543-8B39-D8EE6E4FC44C/main.js" charset="UTF-8"></script>
+    <script src="../knockout-3.5.1.js"></script>
+</head>
+
+<body>
+    <!--Navigation menu-->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact Us</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!--Main section-->
+    <div role="main" class="container">
+        <br /><br />
+
+        <h2>The "Other" Bindings</h2>
+
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+
+            <!--Link functions to data in table-->
+            <tbody data-bind="foreach: tutorial">
+                <tr>
+                    <td data-bind="text: title"></td>
+                    <td data-bind="text: description"></td>
+                    <td><a data-bind="attr: {href: url}" target="_blank">URL</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br />
+    </div>
+
+    <script>
+        //tutorial model, each with their own url, title, and description for table
+        function tutorialViewModel() {
+            this.tutorial = ko.observableArray([{
+                url: 'https://knockoutjs.com/documentation/if-binding.html',
+                title: 'The "if" and "if not" bindings',
+                description: 'The if binding causes a section of markup to appear in your document, only if a specified expression comes back as true. "If not" bindings are the invert of "if" bindings.'
+            }, {
+                url: 'https://knockoutjs.com/documentation/style-binding.html',
+                title: 'The "style" binding',
+                description: 'The style binding adds or removes, one or more, style values to the associated DOM element.'
+            }, {
+                url: 'https://knockoutjs.com/documentation/foreach-binding.html',
+                title: 'The "for each" binding',
+                description: 'This binding multiplies a section of markup for each entry in an array, and then binds each copy of that to the corresponding array item.'
+            }, {
+                url: 'https://knockoutjs.com/documentation/submit-binding.html',
+                title: 'The "submit" binding',
+                description: 'The submit binding adds an event handler so that your chosen function will be invoked when the associated DOM element is submitted.'
+            }, {
+                url: 'https://knockoutjs.com/documentation/click-binding.html',
+                title: 'The "click" binding',
+                description: 'The click binding adds an event handler so your chosen function will be invoked when clicked.'
+            }]);
+        }
+        ko.applyBindings(new tutorialViewModel());
+    </script>
+
+</body>
+
+</html>
