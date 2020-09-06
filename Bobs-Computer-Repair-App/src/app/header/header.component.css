@@ -1,0 +1,24 @@
+/* CSS for header component */
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    background-color: #f6f5f3;
+}
+
+.brand {
+    font-size: 1.2em;
+    padding-right: 50%;
+    color: black;
+}
+
+#shoppingCart {
+    padding-left: 40px;
+}
+
+a {
+    color: black;
+}
+
+
+/* End of CSS page*/

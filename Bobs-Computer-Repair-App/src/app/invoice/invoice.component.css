@@ -1,0 +1,38 @@
+/* CSS for invoice.component.html page */
+
+.container {
+    margin: 30px;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3em;
+    text-align: center;
+}
+
+h2 {
+    margin-left: 40px;
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+p {
+    margin-left: 80px;
+    font-size: 1.5em;
+}
+
+button {
+    position: absolute;
+    bottom: 10%;
+    width: 5%;
+    color: black;
+    font-size: 1.2em;
+    margin-left: 40%;
+}
+
+.button {
+    margin-right: -20%;
+}
+
+
+/* End of CSS page */

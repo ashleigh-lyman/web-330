@@ -1,0 +1,65 @@
+/* CSS for orders.component.html page */
+
+.width {
+    margin: 0 auto;
+    width: 100px;
+}
+
+.form-container {
+    width: 100%;
+    margin-left: 3%;
+    text-align: center;
+    border-radius: 8px;
+    border-style: inset;
+    border-color: darkgray;
+    border-width: 4px;
+    background-color: #f6f5f3;
+}
+
+.servicesLeftAlign {
+    padding-right: 50%;
+}
+
+.servicesRightAlign {
+    margin-top: -28%;
+    padding-left: 30%;
+    padding-bottom: -80%;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Tillana', cursive;
+    font-size: 33px;
+}
+
+.width>span {
+    font-size: 2.5em;
+}
+
+.center {
+    display: inline-block;
+}
+
+button {
+    padding: 12px;
+    background-color: #F7C331;
+    color: black;
+}
+
+.serviceheader {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+}
+
+p {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+}
+
+#labor {
+    background-color: #f6f5f3;
+    color: black;
+}
+
+
+/* End of CSS page */

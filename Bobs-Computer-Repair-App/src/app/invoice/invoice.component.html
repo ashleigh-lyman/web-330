@@ -1,0 +1,68 @@
+<!--Invoice.component.html page-->
+<!--Material Dialog diplays. Accesses the name and price from each variable in the service list that was input-->
+<div class="container">
+    <h1 mat-dialog-title>Order Summary</h1>
+
+    <mat-dialog-content>
+
+      <h2>{{ service.password.name }}</h2>
+
+          <p>{{ service.password.price | currency }}</p>
+
+      <h2>{{ service.spyware.name }}</h2>
+
+          <p>{{ service.spyware.price | currency }}</p>
+
+      <h2>{{ service.memory.name }}</h2>
+
+          <p>{{ service.memory.price | currency }}</p>
+
+      <h2>{{ service.software.name }}</h2>
+
+          <p>{{ service.software.price | currency }}</p>
+
+      <h2>{{ service.tuneUp.name }}</h2>
+
+          <p>{{ service.tuneUp.price | currency }}</p>
+
+      <h2>{{ service.cleanUp.name }}</h2>
+
+          <p>{{ service.cleanUp.price | currency }}</p>
+
+      <h2>{{ service.keyboard.name }}</h2>
+
+          <p>{{ service.keyboard.price | currency }}</p>
+
+      <h2>{{ service.labor.name }}</h2>
+
+          <p>{{ service.labor.price | currency }}</p>
+
+      <h2>{{ service.parts.name }}</h2>
+
+          <p>{{ service.parts.info }}</p>
+
+ <br />
+<br />
+ <hr />
+
+ <!--Displays calculated name and price from service list input-->
+      <h2>{{ service.total.name }}</h2>
+
+          <p>{{ service.total.price | currency }}</p>
+
+    </mat-dialog-content>
+<!--End of Material Dialog content-->
+
+
+
+<!--Material Dialog button. Click action button binds to invoice.component.ts. Closes dialog box when clicked-->
+    <mat-dialog-actions>
+      <button mat-raised-button color="accent" (click)="confirm()">Confirm</button>
+    </mat-dialog-actions>
+<!--End of Material Dialog button-->
+
+
+
+
+
+<!--End of Invoice component html page.-->

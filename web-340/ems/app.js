@@ -2,18 +2,17 @@
 =======================================
 ; Title:  app.js
 ; Author: Ashleigh Lyman
-; Date:   17 March 2020
-; Description: EJS layouts
+; Date:   19 April 2020
+; Description: EMS project
 ;======================================
 */
 
 //Header
 var header = require('../Lyman-header');
-console.log(header.display('Ashleigh', 'Lyman', 'Exercise 5.2 - EJS if-else', '03/17/2020'));
+console.log(header.display('Ashleigh', 'Lyman', 'Exercise 9.2 - EMS project', '04/19/2020'));
 
 //Empty Line
 console.log("\n");
-
 
 var express = require("express");
 var http = require("http");
@@ -21,179 +20,161 @@ var path = require("path");
 var logger = require("morgan");
 var mongoose = require('mongoose');
 var bodyParser = require("body-parser");
-var Employee = require("./models/employee");
 var helmet = require("helmet");
 var cookieParser = require("cookie-parser");
 var csrf = require("csurf");
 
+const Employee = require('./models/employee');
 
-var mongoDb = "mongodb+srv://new-user_25:testuser1@buwebdev-cluster-1-2fw4y.mongodb.net/ems";
+var app = express();
 
-mongoose.connect(mongoDb, {
+// MongoDB connection
+var mongoDB = "mongodb+srv://admin:Lymanfamily@buwebdev-cluster-1-akyor.mongodb.net/Lyman-ems";
+mongoose.connect(mongoDB, {
     useMongoClient: true
 });
 
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error: '));
 
-db.once('open', function() {
-    console.log('Application connected to mLab');
+db.on("error", console.error.bind(console, "MongoDB connected error: "));
+db.once("open", function() {
+    console.log("Application connected to mLab MongoDB instance");
 });
 
 
-var csrfProtection = csrf({ cookie: true });
+// Set up csrf protection
+var csrfProtection = csrf({
+    cookie: true
+});
 
-/**
- * Initializes the express application.
- */
 
-var app = express();
-// Body parser
-app.use(
-    bodyParser.urlencoded({
-        extended: true
-    })
-);
-// Cookie parser
+//HTTP USE
+app.use(logger("short"));
+app.use(helmet.xssFilter());
+
+app.use(bodyParser.urlencoded({
+
+    extended: true
+
+}));
+
 app.use(cookieParser());
-
-// CSRF protection
 app.use(csrfProtection);
-/**
- * Intercepts all incoming requests and adds a CSRF token to the response.
- */
-app.use(function(req, res, next) {
-    var token = req.csrfToken();
-    res.cookie('XSRF-TOKEN', token);
-    res.locals.csrfToken = token;
+
+
+app.use(function(request, response, next) {
+    var token = request.csrfToken();
+    response.cookie('XSRF-TOKEN', token);
+    response.locals.csrfToken = token;
     next();
 });
 
+//HTTP SET
 app.set("views", path.resolve(__dirname, "views"));
 app.set("view engine", "ejs");
 app.set('port', process.env.PORT || 8080);
 
-app.use(logger("short"));
-app.use(helmet.xssFilter());
+
+//HTTP GET
 
 
-app.get("/", function(req, res) {
-    res.render("index", {
-        title: "Homepage"
-    });
-});
-
-app.get("/new", function(req, res) {
-    res.render("new", {
-        title: "New Employee"
-    });
-});
-
-
-app.get("/view/:FirstName/:LastName", function(request, response) {
-    var firstName = req.params["firstName"];
-    var lastName = req.params["lastName"];
-
-    Employee.find({ 'lastName': queryName }, function(error, employees) {
-        if (error) throw error;
-        if (employees.length > 0) {
-            response.render("view", {
-                title: "User Records",
-                employee: employees,
-                styles: ""
-            })
-        } else {
-            response.redirect("/list")
-        }
-    });
-
-
-});
-
-app.get("/edit/:firstName/:lastName", (req, res) => {
-    var firstName = req.params["firstName"];
-    var lastName = req.params["lastName"];
-
-    Employee.find({ firstName: firstName, lastName: lastName }, function(
-        error,
-        employee
-    ) {
-        if (error) throw err;
-
-        if (employee != null) {
-            res.render("edit", {
-                title: "Edit Employee Record",
-                employee: employee
-            });
-        } else {
-            res.redirect("/");
-        }
-    });
-});
-
-app.get("/list", function(req, res) {
-    Employee.find({}, function(error, employees) {
-        if (error) throw error;
-        res.render("list", {
-            title: "User List",
-            employees: employees,
-            styles: ""
-        });
-    });
-});
-
+//employee function. render index
 app.get("/", function(request, response) {
-    response.render("index", {
-        title: "Homepage"
+    Employee.find({}, function(error, employees) {
+        if (error) {
+            console.log(error);
+            throw error;
+        } else {
+            console.log(employees);
+            response.render('index', {
+                title: 'EMS Home Page',
+                employees: employees
+            });
+        };
     });
 });
 
-app.post("/process", function(req, res) {
-    if (!req.body.txtFirstName) {
-        res.status(400).send("Name is required");
+app.get("/new", function(request, response) {
+    response.render("new", {
+        title: "New EMS Entry"
+    });
+});
+
+app.get("/view/:queryName", function(request, response) {
+
+    var queryName = request.params.queryName;
+
+    Employee.find({ 'name': queryName }, function(error, employees) {
+
+        if (error) throw error;
+
+        console.log(employees);
+
+        if (employees.length > 0) {
+
+            response.render("view", {
+
+                title: "Employee Records",
+
+                employee: employees
+
+            })
+
+        } else {
+
+            response.redirect("/list")
+
+        }
+
+    });
+
+});
+
+app.post("/process", function(request, response) {
+
+    debugger;
+    if (!request.body.firstName) {
+        response.status(400).send('Entries must have a name');
+        return;
+    }
+    if (!request.body.empID) {
+        response.status(400).send('Entries must have an employee number');
+        return;
+    }
+    if (!request.body.empTitle) {
+        response.status(400).send('Entries must have a title');
         return;
     }
 
-    app.post("/edit", (req, res) => {
-        if (!req.body.txtFirstName || !req.body.txtLastName) {
-            res.status(400).send("Entries require a name");
-            return;
-        }
+    var employeeFirstName = request.body.firstName;
+    var employeeLastName = request.body.lastName;
+    var empID = request.body.empID;
+    var empTitle = request.body.empTitle;
+    console.log(employeeFirstName + " " + employeeLastName);
 
-        var FirstName = req.body.txtFirstName;
-        var LastName = req.body.txtLastName;
-        var employee = new Employee({
-            firstName: req.body.txtFirstName,
-            lastName: req.body.txtLastName
-        });
-        employee.save((error) => {
-            if (error) throw error;
-            console.log(emp + "Data has been saved! ");
-        });
-        res.redirect("/");
+    var employee = new Employee({
+        firstName: employeeFirstName,
+        lastName: employeeLastName,
+        empID: empID,
+        empTitle: empTitle,
     });
 
-
-    Employee.findAndUpdate({ _id: req.body.hiddenId }, {
-        $set: {
-            firstName: req.body.txtFirstName,
-            lastName: req.body.txtLastName
+    employee.save(function(err) {
+        debugger;
+        if (err) {
+            console.log(err);
+            throw err;
+        } else {
+            console.log(employeeFirstName + ' saved successfully!');
+            response.redirect('/');
         }
-    }, function(
-        error, employee) {
-        if (error) throw err;
-        console.log(employee + " Employee Record is Updated");
     });
 
-    res.redirect("/");
 });
 
-app.set("port", process.env.PORT || 8080);
 
-app.listen(app.get("port"), function() {
-
-    console.log("Application started on port " + app.get("port"));
+//Server. Display message
+http.createServer(app).listen(app.get('port'), function() {
+    console.log('Application started on port ' + app.get('port'));
 });
-
-http.createServer(app).listen(app.get("port"), function() { console.log("Application started and listening on port " + app.get("port")) });
