@@ -1,0 +1,19 @@
+{
+    "name": "mongoose-example",
+    "version": "1.0.0",
+    "description": "Mongoose example",
+    "main": "index.js",
+    "scripts": {
+        "start": "node app.js",
+        "devStart": "nodemon app.js"
+    },
+    "author": "Ashleigh Lyman",
+    "license": "MIT",
+    "dependencies": {
+        "express": "^4.17.1",
+        "mongoose": "^5.10.6"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.4"
+    }
+}
